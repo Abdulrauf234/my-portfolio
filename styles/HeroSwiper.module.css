@@ -1,0 +1,200 @@
+.heroSection {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+}
+
+.glowOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mySwiper {
+  height: 100%;
+  width: 100%;
+}
+
+.swiperSlide {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  animation: zoomBg 20s infinite alternate ease-in-out;
+}
+
+.darkGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, var(--bg-deep) 10%, rgba(9, 14, 26, 0.4) 60%, rgba(9, 14, 26, 0.7) 100%),
+              linear-gradient(90deg, rgba(9, 14, 26, 0.95) 0%, rgba(9, 14, 26, 0.6) 50%, rgba(9, 14, 26, 0.3) 100%);
+  z-index: 1;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding-top: 5rem;
+}
+
+.slideGrid {
+  max-width: 800px;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.tagWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.08) !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
+.slideIcon {
+  color: var(--accent-cyan);
+}
+
+.tagText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text-white);
+  letter-spacing: -0.04em;
+}
+
+.accentWord {
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.benefitsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-white);
+}
+
+.checkIcon {
+  color: var(--accent-cyan);
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+@keyframes zoomBg {
+  0% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .ctaRow {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .ctaRow > a {
+    width: 100%;
+  }
+  .benefitsRow {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    height: auto;
+    min-height: 100vh;
+    padding: 7rem 0 4rem 0;
+    display: flex;
+    align-items: center;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .contentContainer {
+    padding-top: 1rem;
+  }
+  .tagWrapper {
+    padding: 0.35rem 0.85rem;
+  }
+  .tagText {
+    font-size: 0.75rem;
+  }
+}

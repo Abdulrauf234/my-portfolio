@@ -1,0 +1,42 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    String   // Web Development, Video Editing, Graphics Design
+  imageUrl    String
+  link        String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Promotion {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  discount    String?  // e.g. "20% OFF"
+  code        String?  // e.g. "DEV20"
+  imageUrl    String?
+  active      Boolean  @default(true)
+  link        String?
+  createdAt   DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("pending") // pending, read, archived
+  createdAt DateTime @default(now())
+}
