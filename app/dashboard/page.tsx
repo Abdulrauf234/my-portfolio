@@ -22,34 +22,13 @@ import {
   addProject, 
   getPromotions, 
   addPromotion, 
-  getContactMessages 
+  getContactMessages,
+  Project,
+  Promotion,
+  ContactMessage as Message
 } from "@/lib/storage";
 
 type TabType = "overview" | "projects" | "promotions" | "messages";
-
-interface Project {
-  id: string;
-  title: string;
-  category: string;
-  featured: boolean;
-}
-
-interface Promotion {
-  id: string;
-  title: string;
-  discount?: string;
-  code?: string;
-  active: boolean;
-}
-
-interface Message {
-  id: string;
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-  createdAt: string;
-}
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<TabType>("overview");

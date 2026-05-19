@@ -4,17 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, FolderOpen, AlertCircle, ArrowUpRight } from "lucide-react";
 import styles from "@/styles/FeaturedProjects.module.css";
-import { getProjects } from "@/lib/storage";
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  imageUrl: string;
-  link?: string | null;
-  featured: boolean;
-}
+import { getProjects, Project } from "@/lib/storage";
 
 const CATEGORIES = ["All", "Web Development", "Video Editing", "Graphics Design"];
 
