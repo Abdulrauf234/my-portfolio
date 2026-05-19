@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, FolderOpen, AlertCircle, ArrowUpRight } from "lucide-react";
 import styles from "@/styles/FeaturedProjects.module.css";
+import { getProjects } from "@/lib/storage";
 
 interface Project {
   id: string;
@@ -11,7 +12,7 @@ interface Project {
   description: string;
   category: string;
   imageUrl: string;
-  link?: string;
+  link?: string | null;
   featured: boolean;
 }
 
@@ -25,22 +26,20 @@ export default function FeaturedProjects() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function fetchProjects() {
+    function loadProjects() {
       try {
-        const res = await fetch("/api/projects");
-        if (!res.ok) throw new Error("Failed to fetch projects");
-        const data = await res.ok ? await res.json() : [];
+        const data = getProjects();
         setProjects(data);
         setFilteredProjects(data);
       } catch (err) {
         console.error(err);
-        setError("Unable to load featured projects from database. Please check your setup.");
+        setError("Unable to load featured projects from storage. Please check your setup.");
       } finally {
         setLoading(false);
       }
     }
 
-    fetchProjects();
+    loadProjects();
   }, []);
 
   useEffect(() => {

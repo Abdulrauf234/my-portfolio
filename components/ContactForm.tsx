@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Send, CheckCircle, Mail, Phone, MessageSquare, Instagram, Github } from "lucide-react";
 import styles from "@/styles/ContactForm.module.css";
+import { addContactMessage } from "@/lib/storage";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -25,15 +26,10 @@ export default function ContactForm() {
     setError("");
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // Small artificial delay to preserve premium transmission micro-interaction
+      await new Promise((resolve) => setTimeout(resolve, 600));
 
-      if (!res.ok) {
-        throw new Error("Unable to save inquiry. Please check backend connection.");
-      }
+      addContactMessage(formData);
 
       setSuccess(true);
       setFormData({ name: "", email: "", subject: "Web Development", message: "" });

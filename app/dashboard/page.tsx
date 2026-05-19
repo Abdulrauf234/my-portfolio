@@ -17,6 +17,13 @@ import {
   Lock
 } from "lucide-react";
 import styles from "@/styles/Dashboard.module.css";
+import { 
+  getProjects, 
+  addProject, 
+  getPromotions, 
+  addPromotion, 
+  getContactMessages 
+} from "@/lib/storage";
 
 type TabType = "overview" | "projects" | "promotions" | "messages";
 
@@ -73,17 +80,11 @@ export default function Dashboard() {
   });
 
   // Fetch Admin Data
-  async function fetchAllData() {
+  function fetchAllData() {
     try {
-      const [projRes, promoRes, msgRes] = await Promise.all([
-        fetch("/api/projects"),
-        fetch("/api/promotions"),
-        fetch("/api/contact"),
-      ]);
-
-      if (projRes.ok) setProjects(await projRes.json());
-      if (promoRes.ok) setPromotions(await promoRes.json());
-      if (msgRes.ok) setMessages(await msgRes.json());
+      setProjects(getProjects());
+      setPromotions(getPromotions());
+      setMessages(getContactMessages());
     } catch (err) {
       console.error("Error loading dashboard data:", err);
     } finally {
@@ -102,15 +103,12 @@ export default function Dashboard() {
     setFeedback({ success: "", error: "" });
 
     try {
-      const res = await fetch("/api/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projectForm),
-      });
+      // Small artificial delay for premium micro-interaction
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-      if (!res.ok) throw new Error("Could not create project listing.");
+      addProject(projectForm);
 
-      setFeedback({ success: "Project listing added successfully to SQLite DB!", error: "" });
+      setFeedback({ success: "Project listing added successfully to local storage!", error: "" });
       setProjectForm({
         title: "",
         description: "",
@@ -134,15 +132,12 @@ export default function Dashboard() {
     setFeedback({ success: "", error: "" });
 
     try {
-      const res = await fetch("/api/promotions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(promoForm),
-      });
+      // Small artificial delay for premium micro-interaction
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-      if (!res.ok) throw new Error("Could not create promotional campaign.");
+      addPromotion(promoForm);
 
-      setFeedback({ success: "Promotional banner added successfully to SQLite DB!", error: "" });
+      setFeedback({ success: "Promotional banner added successfully to local storage!", error: "" });
       setPromoForm({
         title: "",
         description: "",
